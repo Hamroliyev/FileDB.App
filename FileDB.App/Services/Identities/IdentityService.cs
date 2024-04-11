@@ -11,7 +11,7 @@ namespace FileDB.App.Services.Identities
 
         private IdentityService()
         {
-            this.storageBroker = storageBroker;
+            this.storageBroker = new JsonStorageBroker();
         }
 
         public static IdentityService GetInstance()

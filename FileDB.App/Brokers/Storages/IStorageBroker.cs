@@ -7,7 +7,7 @@ namespace FileDB.App.Brokers.Storages
     {
         User AddUser(User user);
         List<User> ReadAllUsers();
-        void UpdateUser(User user);
-        void DeleteUser(int id);
+        User UpdateUser(User user);
+        bool DeleteUser(int id);
     }
 }

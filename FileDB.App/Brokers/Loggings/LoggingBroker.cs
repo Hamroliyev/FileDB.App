@@ -1,4 +1,6 @@
-﻿namespace FileDB.App.Brokers.Loggings
+﻿using System;
+
+namespace FileDB.App.Brokers.Loggings
 {
     internal class LoggingBroker : ILoggingBroker
     {

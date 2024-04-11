@@ -11,10 +11,11 @@ namespace FileDB.App.Services.Users
         private readonly IStorageBroker storageBroker;
         private readonly ILoggingBroker loggingBroker;
 
-        public UserService()
+        public UserService(ILoggingBroker loggingBroker,
+            IStorageBroker storageBroker)
         {
-            this.storageBroker = new JsonStorageBroker();
-            this.loggingBroker = new LoggingBroker();
+            this.loggingBroker = loggingBroker;
+            this.storageBroker = storageBroker;
         }
 
         public User AddUser(User user)
@@ -26,14 +27,25 @@ namespace FileDB.App.Services.Users
 
         public List<User> GetAllUsers()
         {
-            List<User> users = this.storageBroker.ReadAllUsers();
+            List<User> users = new List<User>();
+
+            try
+            {
+                users = this.storageBroker.ReadAllUsers();
+            }
+            catch (Exception exception)
+            {
+                this.loggingBroker.LogError(exception.Message);
+
+                return new List<User>();
+            }
 
             foreach (User user in users)
             {
                 this.loggingBroker.LogInforamation($"{user.Id}, {user.Name}");
             }
 
-            this.loggingBroker.LogInforamation("===End of users");
+            this.loggingBroker.LogInforamation("=== End of users ===");
 
             return users;
         }
@@ -49,11 +61,13 @@ namespace FileDB.App.Services.Users
             if (user.Id is 0 || String.IsNullOrWhiteSpace(user.Name))
             {
                 this.loggingBroker.LogError("User details missing.");
+
                 return new User();
             }
             else
             {
                 this.loggingBroker.LogInforamation("User is created successfully");
+
                 return this.storageBroker.AddUser(user);
             }
         }
@@ -61,10 +75,18 @@ namespace FileDB.App.Services.Users
         public bool DeleteUser(int id)
         {
             bool isDeleted = false;
-            List<User> users = this.storageBroker.ReadAllUsers();
-            isDeleted = this.storageBroker.DeleteUser(id);
-            this.loggingBroker.LogError($"User with ID {id} not found.");
+            List<User> users = new List<User>();
 
+            try
+            {
+                users = this.storageBroker.ReadAllUsers();
+                isDeleted = this.storageBroker.DeleteUser(id);
+            }
+            catch (Exception exception)
+            {
+                this.loggingBroker.LogError($"User with ID {id} not found." + "\n" + exception.Message);
+            }
+                
             return isDeleted;
         }
 
@@ -81,8 +103,15 @@ namespace FileDB.App.Services.Users
                 this.loggingBroker.LogError("Your user is invalid");
             }
 
-            this.storageBroker.UpdateUser(user);
-
+            try
+            {
+                this.storageBroker.UpdateUser(user);
+            }
+            catch (Exception exception)
+            {
+                this.loggingBroker.LogError("Updating failed " + exception.Message);
+            }
+            
             return user;
         }
     }

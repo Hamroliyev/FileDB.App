@@ -77,7 +77,7 @@ namespace FileDB.App
             ILoggingBroker loggingBroker = new LoggingBroker();
             IStorageBroker storageBroker = new JsonStorageBroker();
             IUserService userService = new UserService(loggingBroker, storageBroker);
-            IdentityService identitiyService = IdentityService.GetInstance();
+            IdentityService identitiyService = IdentityService.GetInstance(storageBroker);
 
             UserProcessingService userProcessingService = 
                 new UserProcessingService(userService,

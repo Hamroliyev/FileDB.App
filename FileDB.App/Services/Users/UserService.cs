@@ -8,8 +8,8 @@ namespace FileDB.App.Services.Users
 {
     internal class UserService : IUserService
     {
-        private readonly IStorageBroker storageBroker;
         private readonly ILoggingBroker loggingBroker;
+        private readonly IStorageBroker storageBroker;
 
         public UserService(ILoggingBroker loggingBroker,
             IStorageBroker storageBroker)

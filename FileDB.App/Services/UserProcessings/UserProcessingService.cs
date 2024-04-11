@@ -16,11 +16,9 @@ namespace FileDB.App.Services.UserProcessings
             this.identityService = identitiyService;
         }
 
-        public User CreateNewUser(string name)
+        public User CreateNewUser(User user)
         {
-            User user = new User();
             user.Id = this.identityService.GetNewId();
-            user.Name = name;
             this.userService.AddUser(user);
 
             return user;
@@ -32,10 +30,8 @@ namespace FileDB.App.Services.UserProcessings
         public bool DeleteUser(int id) =>
             this.userService.DeleteUser(id);
 
-        public void UpdateUser(string name)
+        public void UpdateUser(User user)
         {
-            User user = new User();
-            user.Name = name;
             this.userService.UpdateUser(user);
         }
     }

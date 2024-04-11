@@ -1,9 +1,11 @@
 ﻿using FileDB.App.Brokers.Loggings;
 using FileDB.App.Brokers.Storages;
+using FileDB.App.Models.Users;
 using FileDB.App.Services.Identities;
 using FileDB.App.Services.UserProcessings;
 using FileDB.App.Services.Users;
 using System;
+using System.Xml.Linq;
 
 namespace FileDB.App
 {
@@ -25,7 +27,8 @@ namespace FileDB.App
                         Console.Clear();
                         Console.Write("Enter you name:");
                         string userName = Console.ReadLine();
-                        userProcessingService.CreateNewUser(userName);
+                        User user = new User() { Name = userName };
+                        userProcessingService.CreateNewUser(user);
                         break;
 
                     case "2":
@@ -55,7 +58,8 @@ namespace FileDB.App
                             int id = Convert.ToInt32(idStr);
                             Console.Write("Enter name:");
                             string name = Console.ReadLine();
-                            userProcessingService.UpdateUser(name);
+                            User user1 = new User() { Name = name };
+                            userProcessingService.UpdateUser(user1);
                         }
                         break;
 

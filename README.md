@@ -1,7 +1,6 @@
 # FileDB.App
 This development is about using files as a database (I know this is ridiculous idea)
 
-<<<<<<< HEAD
 # .NET Console App - Text/JSON Database CRUD
 
 This .NET console application allows you to use either a text file or a JSON file as a database to perform full CRUD (Create, Read, Update, Delete) operations. 
@@ -35,7 +34,9 @@ Contributions are welcome! If you find any issues or would like to add new featu
 If you have any questions or suggestions, please feel free to contact the maintainer at hamroliyevahmadjon1909@gmail.com.
 
 Thank you for using our .NET Console App for CRUD operations with text and JSON file databases!
+
 =======
+
     using FileDB.App.Brokers.Loggings;
     using FileDB.App.Brokers.Storages;
     using FileDB.App.Services.Identities;
@@ -200,4 +201,3 @@ Thank you for using our .NET Console App for CRUD operations with text and JSON 
             }
         }
     }
->>>>>>> 407267ef960d1c2ac31a801fb5da2527321625f7

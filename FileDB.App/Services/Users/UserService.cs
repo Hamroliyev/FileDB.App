@@ -53,6 +53,7 @@ namespace FileDB.App.Services.Users
         private User CreateAndLogInvalidUser()
         {
             this.loggingBroker.LogError("User is invalid");
+
             return new User();
         }
 
@@ -98,7 +99,7 @@ namespace FileDB.App.Services.Users
                 return new User();
             }
 
-            if (user.Id == 0 || String.IsNullOrEmpty(user.Name))
+            if (user.Id is 0 || String.IsNullOrEmpty(user.Name))
             {
                 this.loggingBroker.LogError("Your user is invalid");
             }

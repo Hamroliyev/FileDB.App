@@ -5,7 +5,6 @@ using FileDB.App.Services.UserProcessings;
 using FileDB.App.Services.Users;
 using System;
 using System.IO;
-using System.Reflection;
 
 namespace FileDB.App
 {

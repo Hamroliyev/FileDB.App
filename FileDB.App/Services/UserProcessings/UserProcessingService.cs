@@ -30,9 +30,7 @@ namespace FileDB.App.Services.UserProcessings
         public bool DeleteUser(int id) =>
             this.userService.DeleteUser(id);
 
-        public void UpdateUser(User user)
-        {
+        public void UpdateUser(User user) =>
             this.userService.UpdateUser(user);
-        }
     }
 }

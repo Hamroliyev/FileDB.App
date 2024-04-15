@@ -16,8 +16,8 @@ namespace FileDB.App.Brokers.Storages
         public User AddUser(User user)
         {
             string userLine = $"{user.Id}*{user.Name}\n";
-
             File.AppendAllText(FilePath, userLine);
+
             return user;
         }
 
@@ -30,7 +30,6 @@ namespace FileDB.App.Brokers.Storages
                 if (users[i].Id == user.Id)
                 {
                     users[i] = user;
-                    break;
                 }
             }
 

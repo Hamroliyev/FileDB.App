@@ -33,9 +33,7 @@ namespace FileDB.App.Services.Identities
                 : 1;
         }
 
-        private static int IncrementLastUsersId(List<User> users)
-        {
-            return users[users.Count - 1].Id + 1;
-        }
+        private static int IncrementLastUsersId(List<User> users) =>
+            users[users.Count - 1].Id + 1;
     }
 }

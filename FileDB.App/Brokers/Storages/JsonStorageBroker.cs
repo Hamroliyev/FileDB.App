@@ -40,7 +40,6 @@ namespace FileDB.App.Brokers.Storages
             List<User> users = JsonSerializer.Deserialize<List<User>>(usersString);
             User updatedUser = users.FirstOrDefault(u => u.Id == user.Id);
             updatedUser.Name = user.Name;
-
             string serializedUsers = JsonSerializer.Serialize(users);
             File.WriteAllText(FilePath, serializedUsers);
 

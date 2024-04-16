@@ -36,7 +36,8 @@ If you have any questions or suggestions, please feel free to contact the mainta
 Thank you for using our .NET Console App for CRUD operations with text and JSON file databases!
 
 =======
-      ```cs
+
+```cs
       using FileDB.App.Brokers.Loggings;
       using FileDB.App.Brokers.Storages;
       using FileDB.App.Models.Users;
@@ -148,4 +149,4 @@ Thank you for using our .NET Console App for CRUD operations with text and JSON 
               }
           }
       }
-      ```
+```

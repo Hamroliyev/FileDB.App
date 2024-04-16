@@ -35,6 +35,9 @@ If you have any questions or suggestions, please feel free to contact the mainta
 
 Thank you for using our .NET Console App for CRUD operations with text and JSON file databases!
 
+Demo
+![result](https://github.com/Hamroliyev/FileDB.App/assets/90793925/bb4b3bc5-ef06-40a5-b50f-c4b649ea93cc)
+
 =======
 
 ```cs

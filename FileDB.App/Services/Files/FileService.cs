@@ -7,7 +7,7 @@ namespace FileDB.App.Services.Files
     internal class FileService
     {
         private readonly ILoggingBroker loggingBroker;
-        private string docPath { get; set; }
+        private string docPath;
         private readonly DirectoryInfo root;
         private long totalSize;
         public FileService(string docPath, ILoggingBroker loggingBroker)

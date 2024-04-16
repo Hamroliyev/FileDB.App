@@ -19,63 +19,48 @@ namespace FileDB.App.Services.Files
 
         public void GetFileSize()
         {
-            try
+            foreach (FileInfo fileInfo in root.EnumerateFiles())
             {
-                foreach (FileInfo fileInfo in root.EnumerateFiles())
+                try
                 {
-                    try
+                    if (fileInfo.Length >= 0)
                     {
-                        if (fileInfo.Length >= 0)
-                        {
-                            this.loggingBroker.LogInformation($"{fileInfo.FullName}\t\t{fileInfo.Length.ToString("N0")}");
-                            totalSize = totalSize + fileInfo.Length;
-                        }
-                    }
-                    catch (UnauthorizedAccessException unAuthTop)
-                    {
-                        this.loggingBroker.LogInformation($"{unAuthTop.Message}");
+                        this.loggingBroker.LogInformation($"{fileInfo.FullName}\t\t{fileInfo.Length.ToString("N0")}");
+                        totalSize = totalSize + fileInfo.Length;
                     }
                 }
+                catch (UnauthorizedAccessException unauthorizedAccessException)
+                {
+                    this.loggingBroker.LogInformation($"{unauthorizedAccessException.Message}");
+                }
+            }
 
-                foreach (DirectoryInfo directoryInfo in root.EnumerateDirectories("*"))
+            foreach (DirectoryInfo directoryInfo in root.EnumerateDirectories("*"))
+            {
+                try
                 {
-                    try
+                    foreach (FileInfo fileInfo in directoryInfo.EnumerateFiles("*", SearchOption.AllDirectories))
                     {
-                        foreach (FileInfo fileInfo in directoryInfo.EnumerateFiles("*", SearchOption.AllDirectories))
+                        try
                         {
-                            try
+                            if (fileInfo.Length >= 0)
                             {
-                                if (fileInfo.Length >= 0)
-                                {
-                                    this.loggingBroker.LogInformation($"{fileInfo.FullName}\t\t{fileInfo.Length.ToString("N0")}");
-                                    totalSize += fileInfo.Length;
-                                }
-                            }
-                            catch (UnauthorizedAccessException unAuthFile)
-                            {
-                                this.loggingBroker.LogInformation($"unAuthFile: {unAuthFile.Message}");
+                                this.loggingBroker.LogInformation($"{fileInfo.FullName}\t\t{fileInfo.Length.ToString("N0")}");
+                                totalSize += fileInfo.Length;
                             }
                         }
-                    }
-                    catch (UnauthorizedAccessException unAuthSubDir)
-                    {
-                        this.loggingBroker.LogInformation($"unAuthSubDir: {unAuthSubDir.Message}");
+                        catch (UnauthorizedAccessException unauthorizedAccessException)
+                        {
+                            this.loggingBroker.LogInformation($"unAuthFile: {unauthorizedAccessException.Message}");
+                        }
                     }
                 }
-                this.loggingBroker.LogInformation("Total size of files " + totalSize);
+                catch (UnauthorizedAccessException unauthorizedAccessException)
+                {
+                    this.loggingBroker.LogInformation($"unAuthSubDir: {unauthorizedAccessException.Message}");
+                }
             }
-            catch (DirectoryNotFoundException dirNotFound)
-            {
-                this.loggingBroker.LogInformation($"{dirNotFound.Message}");
-            }
-            catch (UnauthorizedAccessException unAuthDir)
-            {
-                this.loggingBroker.LogInformation($"unAuthDir: {unAuthDir.Message}");
-            }
-            catch (PathTooLongException longPath)
-            {
-                this.loggingBroker.LogInformation($"{longPath.Message}");
-            }
+            this.loggingBroker.LogInformation("Total size of files " + totalSize);
         }
     }
 }

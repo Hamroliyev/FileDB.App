@@ -4,7 +4,7 @@ using FileDB.App.Services.Users;
 
 namespace FileDB.App.Services.UserProcessings
 {
-    internal class UserProcessingService
+    internal class UserProcessingService : IUserProcessingService
     {
         private readonly IUserService userService;
         private readonly IIdentityService identityService;

@@ -15,7 +15,7 @@ namespace FileDB.App
         {
             string userChoice;
             FileService fileService = new FileService("../../../Assets/", new LoggingBroker());
-            UserProcessingService userProcessingService = RegisterUserProcessingService();
+            IUserProcessingService userProcessingService = RegisterUserProcessingService();
 
             do
             {
@@ -84,21 +84,21 @@ namespace FileDB.App
             Console.WriteLine("The app has been finished");
         }
 
-        private static UserProcessingService RegisterUserProcessingService()
+        private static IUserProcessingService RegisterUserProcessingService()
         {
             ILoggingBroker loggingBroker = new LoggingBroker();
             IStorageBroker storageBroker = new JsonStorageBroker();
             IUserService userService = new UserService(loggingBroker, storageBroker);
             IdentityService identitiyService = IdentityService.GetInstance(storageBroker);
 
-            UserProcessingService userProcessingService =
+            IUserProcessingService userProcessingService =
                 new UserProcessingService(userService,
                         identitiyService);
 
             return userProcessingService;
         }
 
-        public static void PrintMenu()
+        private static void PrintMenu()
         {
             Console.WriteLine("\t =====  1.Create User  =====");
             Console.WriteLine("\t =====  2.Display User =====");

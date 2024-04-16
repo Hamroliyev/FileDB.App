@@ -2,7 +2,7 @@
 {
     internal interface ILoggingBroker
     {
-        void LogInforamation(string message);
+        void LogInformation(string message);
         void LogError(string userMessage);
     }
 }

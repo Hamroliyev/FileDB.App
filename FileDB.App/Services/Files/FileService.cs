@@ -4,7 +4,7 @@ using System.IO;
 
 namespace FileDB.App.Services.Files
 {
-    internal class FileService
+    internal class FileService : IFileService
     {
         private readonly ILoggingBroker loggingBroker;
         private string docPath;
@@ -29,9 +29,9 @@ namespace FileDB.App.Services.Files
                         totalSize = totalSize + fileInfo.Length;
                     }
                 }
-                catch (UnauthorizedAccessException unauthorizedAccessException)
+                catch (Exception exception)
                 {
-                    this.loggingBroker.LogInformation($"{unauthorizedAccessException.Message}");
+                    this.loggingBroker.LogError($"{exception.Message}");
                 }
             }
 
@@ -41,25 +41,19 @@ namespace FileDB.App.Services.Files
                 {
                     foreach (FileInfo fileInfo in directoryInfo.EnumerateFiles("*", SearchOption.AllDirectories))
                     {
-                        try
+                        if (fileInfo.Length >= 0)
                         {
-                            if (fileInfo.Length >= 0)
-                            {
-                                this.loggingBroker.LogInformation($"{fileInfo.FullName}\t\t{fileInfo.Length.ToString("N0")}");
-                                totalSize += fileInfo.Length;
-                            }
-                        }
-                        catch (UnauthorizedAccessException unauthorizedAccessException)
-                        {
-                            this.loggingBroker.LogInformation($"unAuthFile: {unauthorizedAccessException.Message}");
+                            this.loggingBroker.LogInformation($"{fileInfo.FullName}\t\t{fileInfo.Length.ToString("N0")}");
+                            totalSize += fileInfo.Length;
                         }
                     }
                 }
-                catch (UnauthorizedAccessException unauthorizedAccessException)
+                catch (Exception exception)
                 {
-                    this.loggingBroker.LogInformation($"unAuthSubDir: {unauthorizedAccessException.Message}");
+                    this.loggingBroker.LogInformation($"Error: {exception.Message}");
                 }
             }
+
             this.loggingBroker.LogInformation("Total size of files " + totalSize);
         }
     }

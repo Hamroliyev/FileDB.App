@@ -14,7 +14,7 @@ namespace FileDB.App
         private static void Main(string[] args)
         {
             string userChoice;
-            FileService fileService = new FileService("../../../Assets/", new LoggingBroker());
+            IFileService fileService = new FileService("../../../Assets/", new LoggingBroker());
             IUserProcessingService userProcessingService = RegisterUserProcessingService();
 
             do

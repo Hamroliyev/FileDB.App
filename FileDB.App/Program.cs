@@ -33,45 +33,38 @@ namespace FileDB.App
                         break;
 
                     case "2":
-                        {
-                            Console.Clear();
-                            userProcessingService.RetrieveUsers();
-                        }
+                        Console.Clear();
+                        userProcessingService.RetrieveUsers();
                         break;
 
                     case "3":
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Enter an id which you want to delete.");
-                            Console.Write("Enter id : ");
-                            string deleteWithIdStr = Console.ReadLine();
-                            int deleteWithId = Convert.ToInt32(deleteWithIdStr);
-                            userProcessingService.DeleteUser(deleteWithId);
-                        }
+                        Console.Clear();
+                        Console.WriteLine("Enter an id which you want to delete.");
+                        Console.Write("Enter id : ");
+                        string deleteWithIdStr = Console.ReadLine();
+                        int deleteWithId = Convert.ToInt32(deleteWithIdStr);
+                        userProcessingService.DeleteUser(deleteWithId);
                         break;
 
                     case "4":
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Enter an id which you want  to edit.");
-                            Console.Write("Enter an id : ");
-                            string idStr = Console.ReadLine();
-                            int id = Convert.ToInt32(idStr);
-                            Console.Write("Enter name : ");
-                            string name = Console.ReadLine();
-                            User user1 = new User() { Name = name };
-                            userProcessingService.UpdateUser(user1);
-                        }
+                        Console.Clear();
+                        Console.WriteLine("Enter an id which you want  to edit.");
+                        Console.Write("Enter an id : ");
+                        string idStr = Console.ReadLine();
+                        int id = Convert.ToInt32(idStr);
+                        Console.Write("Enter name : ");
+                        string name = Console.ReadLine();
+                        User user1 = new User() { Name = name };
+                        userProcessingService.UpdateUser(user1);
                         break;
 
                     case "5":
-                        {
-                            Console.WriteLine("Calculate files size");
-                            fileService.GetFileSize();
-                        }
+                        Console.WriteLine("Calculate files size");
+                        fileService.GetFileSize();
                         break;
 
-                    case "0": break;
+                    case "0": 
+                        break;
 
                     default:
                         Console.WriteLine("You entered wrong input, Try again");

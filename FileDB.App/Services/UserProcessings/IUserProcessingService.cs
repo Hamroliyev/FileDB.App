@@ -6,7 +6,7 @@ namespace FileDB.App.Services.UserProcessings
     {
         User CreateNewUser(User user);
         bool DeleteUser(int id);
-        void DisplayUsers();
+        void RetrieveUsers();
         void UpdateUser(User user);
     }
 }

@@ -24,7 +24,7 @@ namespace FileDB.App.Services.UserProcessings
             return user;
         }
 
-        public void DisplayUsers() =>
+        public void RetrieveUsers() =>
             this.userService.GetAllUsers();
 
         public bool DeleteUser(int id) =>

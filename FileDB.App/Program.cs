@@ -35,7 +35,7 @@ namespace FileDB.App
                     case "2":
                         {
                             Console.Clear();
-                            userProcessingService.DisplayUsers();
+                            userProcessingService.RetrieveUsers();
                         }
                         break;
 

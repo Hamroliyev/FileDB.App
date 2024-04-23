@@ -1,5 +1,6 @@
 ﻿using FileDB.App.Brokers.Loggings;
 using FileDB.App.Brokers.Storages;
+using FileDB.App.Extensions;
 using FileDB.App.Models.Users;
 using FileDB.App.Services.Files;
 using FileDB.App.Services.Identities;
@@ -26,7 +27,7 @@ namespace FileDB.App
                 {
                     case "1":
                         Console.Clear();
-                        Console.Write("Enter you name : ");
+                        "Enter you name : ".SayHi();
                         string userName = Console.ReadLine();
                         User user = new User() { Name = userName };
                         userProcessingService.CreateNewUser(user);

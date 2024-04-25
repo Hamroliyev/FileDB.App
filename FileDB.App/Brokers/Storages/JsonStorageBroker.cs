@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace FileDB.App.Brokers.Storages
 {
@@ -15,13 +16,13 @@ namespace FileDB.App.Brokers.Storages
             EnsureFileExists();
         }
 
-        public User AddUser(User user)
+        public async Task<User> AddUserAsync(User user)
         {
             string usersString = File.ReadAllText(FilePath);
             List<User> users = JsonSerializer.Deserialize<List<User>>(usersString);
             users.Add(user);
             string serializedUsers = JsonSerializer.Serialize(users);
-            File.WriteAllText(FilePath, serializedUsers);
+            await File.WriteAllTextAsync(FilePath, serializedUsers);
 
             return user;
         }

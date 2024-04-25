@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace FileDB.App.Brokers.Storages
 {
@@ -13,10 +14,10 @@ namespace FileDB.App.Brokers.Storages
             EnsureFileExists();
         }
 
-        public User AddUser(User user)
+        public async Task<User> AddUserAsync(User user)
         {
             string userLine = $"{user.Id}*{user.Name}\n";
-            File.AppendAllText(FilePath, userLine);
+            await File.AppendAllTextAsync(FilePath, userLine);
 
             return user;
         }
@@ -37,7 +38,7 @@ namespace FileDB.App.Brokers.Storages
 
             foreach (User userLine in users)
             {
-                AddUser(userLine);
+                AddUserAsync(userLine);
             }
 
             return user;

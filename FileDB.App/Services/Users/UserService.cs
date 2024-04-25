@@ -69,7 +69,7 @@ namespace FileDB.App.Services.Users
             {
                 this.loggingBroker.LogInformation("User is created successfully");
 
-                return this.storageBroker.AddUser(user);
+                return this.storageBroker.AddUserAsync(user);
             }
         }
 

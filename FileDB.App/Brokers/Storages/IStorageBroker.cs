@@ -7,7 +7,7 @@ namespace FileDB.App.Brokers.Storages
     internal interface IStorageBroker
     {
         Task<User> AddUserAsync(User user);
-        List<User> ReadAllUsers();
+        Task<List<User>> ReadAllUsersAsync();
         Task<User> UpdateUserAsync(User user);
         bool DeleteUser(int id);
     }

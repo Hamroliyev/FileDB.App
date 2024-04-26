@@ -44,9 +44,9 @@ namespace FileDB.App.Brokers.Storages
             return user;
         }
 
-        public List<User> ReadAllUsers()
+        public async Task<List<User>> ReadAllUsersAsync()
         {
-            string[] userLines = File.ReadAllLines(FilePath);
+            string[] userLines = await File.ReadAllLinesAsync(FilePath);
             List<User> users = new List<User>();
 
             foreach (string userLine in userLines)

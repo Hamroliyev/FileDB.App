@@ -106,7 +106,7 @@ namespace FileDB.App.Services.Users
 
             try
             {
-                this.storageBroker.UpdateUser(user);
+                this.storageBroker.UpdateUserAsync(user);
             }
             catch (Exception exception)
             {

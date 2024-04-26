@@ -22,7 +22,7 @@ namespace FileDB.App.Brokers.Storages
             return user;
         }
 
-        public User UpdateUser(User user)
+        public async Task<User> UpdateUserAsync(User user)
         {
             List<User> users = ReadAllUsers();
 
@@ -34,11 +34,11 @@ namespace FileDB.App.Brokers.Storages
                 }
             }
 
-            File.WriteAllText(FilePath, string.Empty);
+            await File.WriteAllTextAsync(FilePath, string.Empty);
 
             foreach (User userLine in users)
             {
-                AddUserAsync(userLine);
+                await AddUserAsync(userLine);
             }
 
             return user;

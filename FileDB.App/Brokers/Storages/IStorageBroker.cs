@@ -8,7 +8,7 @@ namespace FileDB.App.Brokers.Storages
     {
         Task<User> AddUserAsync(User user);
         List<User> ReadAllUsers();
-        User UpdateUser(User user);
+        Task<User> UpdateUserAsync(User user);
         bool DeleteUser(int id);
     }
 }

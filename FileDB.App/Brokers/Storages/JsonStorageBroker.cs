@@ -27,9 +27,9 @@ namespace FileDB.App.Brokers.Storages
             return user;
         }
 
-        public List<User> ReadAllUsers()
+        public async Task<List<User>> ReadAllUsersAsync()
         {
-            string usersString = File.ReadAllText(FilePath);
+            string usersString = await File.ReadAllTextAsync(FilePath);
             List<User> users = JsonSerializer.Deserialize<List<User>>(usersString);
 
             return users;

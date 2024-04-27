@@ -24,7 +24,7 @@ namespace FileDB.App.Brokers.Storages
 
         public async Task<User> UpdateUserAsync(User user)
         {
-            List<User> users = ReadAllUsers();
+            List<User> users = await ReadAllUsersAsync();
 
             for (int i = 0; i < users.Count; i++)
             {
@@ -63,12 +63,12 @@ namespace FileDB.App.Brokers.Storages
             return users;
         }
 
-        public bool DeleteUser(int id)
+        public async Task<bool> DeleteUserAsync(int id)
         {
             bool isDeleted = false;
-            string[] userLines = File.ReadAllLines(FilePath);
+            string[] userLines = await File.ReadAllLinesAsync(FilePath);
             int userLength = userLines.Length;
-            File.WriteAllText(FilePath, String.Empty);
+            await File.WriteAllTextAsync(FilePath, String.Empty);
 
             for (int iterator = 0; iterator < userLength; iterator++)
             {
@@ -81,7 +81,7 @@ namespace FileDB.App.Brokers.Storages
                 }
                 else
                 {
-                    File.AppendAllText(FilePath, userLine);
+                    await File.AppendAllTextAsync(FilePath, userLine);
                 }
             }
 

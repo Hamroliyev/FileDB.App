@@ -35,14 +35,14 @@ namespace FileDB.App.Brokers.Storages
             return users;
         }
 
-        public User UpdateUser(User user)
+        public async Task<User> UpdateUserAsync(User user)
         {
-            string usersString = File.ReadAllText(FilePath);
+            string usersString = await File.ReadAllTextAsync(FilePath);
             List<User> users = JsonSerializer.Deserialize<List<User>>(usersString);
             User updatedUser = users.FirstOrDefault(u => u.Id == user.Id);
             updatedUser.Name = user.Name;
             string serializedUsers = JsonSerializer.Serialize(users);
-            File.WriteAllText(FilePath, serializedUsers);
+            await File.WriteAllTextAsync(FilePath, serializedUsers);
 
             return updatedUser;
         }

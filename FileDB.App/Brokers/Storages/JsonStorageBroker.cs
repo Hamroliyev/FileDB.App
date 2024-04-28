@@ -47,14 +47,14 @@ namespace FileDB.App.Brokers.Storages
             return updatedUser;
         }
 
-        public bool DeleteUser(int id)
+        public async Task<bool> DeleteUserAsync(int id)
         {
-            string usersString = File.ReadAllText(FilePath);
+            string usersString = await File.ReadAllTextAsync(FilePath);
             List<User> users = JsonSerializer.Deserialize<List<User>>(usersString);
             User user = users.FirstOrDefault(u => u.Id == id);
             users.Remove(user);
             string serializedUsers = JsonSerializer.Serialize(users);
-            File.WriteAllText(FilePath, serializedUsers);
+            await File.WriteAllTextAsync(FilePath, serializedUsers);
 
             return true;
         }

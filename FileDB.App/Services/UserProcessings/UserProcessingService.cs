@@ -19,7 +19,7 @@ namespace FileDB.App.Services.UserProcessings
         public User CreateNewUser(User user)
         {
             user.Id = this.identityService.GetNewId();
-            this.userService.AddUser(user);
+            this.userService.AddUserAsync(user);
 
             return user;
         }

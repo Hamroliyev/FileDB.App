@@ -3,6 +3,7 @@ using FileDB.App.Brokers.Storages;
 using FileDB.App.Models.Users;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FileDB.App.Services.Users
 {
@@ -18,7 +19,7 @@ namespace FileDB.App.Services.Users
             this.storageBroker = storageBroker;
         }
 
-        public User AddUser(User user)
+        public async Task<User> AddUserAsync(User user)
         {
             return user is null
                 ? CreateAndLogInvalidUser()

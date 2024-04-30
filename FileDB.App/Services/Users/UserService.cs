@@ -23,7 +23,7 @@ namespace FileDB.App.Services.Users
         {
             return user is null
                 ? CreateAndLogInvalidUser()
-                : ValidateAndAddUser(user);
+                : await ValidateAndAddUser(user);
         }
 
         public List<User> GetAllUsers()
@@ -49,29 +49,6 @@ namespace FileDB.App.Services.Users
             this.loggingBroker.LogInformation("=== End of users ===");
 
             return users;
-        }
-
-        private User CreateAndLogInvalidUser()
-        {
-            this.loggingBroker.LogError("User is invalid");
-
-            return new User();
-        }
-
-        private User ValidateAndAddUser(User user)
-        {
-            if (user.Id is 0 || String.IsNullOrWhiteSpace(user.Name))
-            {
-                this.loggingBroker.LogError("User details missing.");
-
-                return new User();
-            }
-            else
-            {
-                this.loggingBroker.LogInformation("User is created successfully");
-
-                return this.storageBroker.AddUserAsync(user);
-            }
         }
 
         public bool DeleteUser(int id)
@@ -115,6 +92,29 @@ namespace FileDB.App.Services.Users
             }
             
             return user;
+        }
+
+        private User CreateAndLogInvalidUser()
+        {
+            this.loggingBroker.LogError("User is invalid");
+
+            return new User();
+        }
+
+        private async Task<User> ValidateAndAddUser(User user)
+        {
+            if (user.Id is 0 || String.IsNullOrWhiteSpace(user.Name))
+            {
+                this.loggingBroker.LogError("User details missing.");
+
+                return new User();
+            }
+            else
+            {
+                this.loggingBroker.LogInformation("User is created successfully");
+
+                return await this.storageBroker.AddUserAsync(user);
+            }
         }
     }
 }

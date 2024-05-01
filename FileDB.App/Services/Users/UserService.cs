@@ -69,7 +69,7 @@ namespace FileDB.App.Services.Users
             return isDeleted;
         }
 
-        public User UpdateUser(User user)
+        public async Task<User> UpdateUserAsync(User user)
         {
             if (user is null)
             {
@@ -84,7 +84,7 @@ namespace FileDB.App.Services.Users
 
             try
             {
-                this.storageBroker.UpdateUserAsync(user);
+                await this.storageBroker.UpdateUserAsync(user);
             }
             catch (Exception exception)
             {
